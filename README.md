@@ -2,6 +2,11 @@
 
 IMAP authentication plugin for [Radicale](http://radicale.org/).
 
+## INFORMATION
+
+This is only a copy for trial and error to understand, how this works.
+Problem is, running radicale with radicale_imap in a docker-container and dovecot bare-metal, the authentication hangs, and I don't know why.
+
 ## Installation
 
 ```shell
