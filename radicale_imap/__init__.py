@@ -30,7 +30,7 @@ class Auth(BaseAuth):
 
     [auth]
     type = radicale_imap
-    imap_host = imap.server.tld
+    imap_host = imap.server.tld[:port]
     imap_secure = True
 
     """
@@ -66,12 +66,16 @@ class Auth(BaseAuth):
                 self.logger.debug("Failed to establish secure connection: %s",
                                   e, exc_info=True)
             try:
+                print("DEBUG before connect")
                 connection.login(user, password)
+                print(connection)
             except imaplib.IMAP4.error as e:
                 self.logger.debug(
                     "IMAP authentication failed: %s", e, exc_info=True)
                 return False
+            print("DEBUG after connect")
             connection.logout()
+            print("DEBUG after logout")
             return True
         except (OSError, imaplib.IMAP4.error) as e:
             raise RuntimeError("Failed to communicate with IMAP server %r: "
