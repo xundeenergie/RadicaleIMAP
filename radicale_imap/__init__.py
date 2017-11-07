@@ -66,16 +66,16 @@ class Auth(BaseAuth):
                 self.logger.debug("Failed to establish secure connection: %s",
                                   e, exc_info=True)
             try:
-                print("DEBUG before connect")
+                self.logger.debug("DEBUG before connect")
                 connection.login(user, password)
-                print(connection)
+                self.logger.debug(connection)
             except imaplib.IMAP4.error as e:
                 self.logger.debug(
                     "IMAP authentication failed: %s", e, exc_info=True)
                 return False
-            print("DEBUG after connect")
+            self.logger.debug("DEBUG after connect")
             connection.logout()
-            print("DEBUG after logout")
+            self.logger.debug("DEBUG after logout")
             return True
         except (OSError, imaplib.IMAP4.error) as e:
             raise RuntimeError("Failed to communicate with IMAP server %r: "
